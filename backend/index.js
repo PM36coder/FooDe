@@ -5,6 +5,7 @@ import connectDb from './database/db.js';
 import userAuthRoute from './routes/userAuthRoute.js'
 import foodAuthRoute from './routes/foodPartnerRoute.js'
 import foodItemRoute from './routes/foodRoutes.js'
+import getFoodRouter from './routes/getFoodPartnerFood.js'
 dotenv.config()
 
 const PORT  = process.env.PORT || 3000
@@ -21,6 +22,7 @@ app.get('/',(req,res)=>{
 app.use('/api/user', userAuthRoute)
 app.use('/api/food-partner', foodAuthRoute)
 app.use('/api/food-item',foodItemRoute)
+app.use('/api/food-partner',getFoodRouter)
 
 connectDb().then(()=>{
     app.listen(PORT,()=>{
