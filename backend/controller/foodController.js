@@ -70,4 +70,17 @@ const deleteFoodItem = async (req,res)=>{
     }
 }
 
-export { createFoodItem ,deleteFoodItem};
+
+const getAllFoodItems = async (req,res)=>{
+
+  try{
+    const foodItems = await FoodItem.find().populate('foodPartnerId', 'name email').sort({createdAt: -1});
+
+    return res.status(200).json({data: foodItems})
+
+  }catch(error){
+    console.error("Error in getting all food items:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+export { createFoodItem ,deleteFoodItem ,getAllFoodItems};
