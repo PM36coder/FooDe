@@ -5,13 +5,19 @@ import {UserLogin} from './pages/user/UserLogin'
 import {UserSignup} from './pages/user/UserSignUp'
 import { PartnerLogin } from "./pages/food-partner/PartnerLogin"
 import { PartnerSign } from "./pages/food-partner/PArtnerSign"
+import { About } from "./pages/About"
+import { Contact } from "./pages/Contact"
+import { Services } from "./pages/Service"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true,path:'', element: <Home /> },
+      { index: true, element: <Home /> },
+      {path:"about" , element:<About/>},
+      {path:"contact", element:<Contact/>},
+      {path:"services", element:<Services/>},
 
       // ✅ User Routes
       { path: "user/login", element: <UserLogin/> },

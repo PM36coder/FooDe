@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
+import cors from 'cors'
 import connectDb from './database/db.js';
 import userAuthRoute from './routes/userAuthRoute.js'
 import foodAuthRoute from './routes/foodPartnerRoute.js'
@@ -11,8 +12,20 @@ dotenv.config()
 const PORT  = process.env.PORT || 3000
 
 const app = express()
-app.use(cookieParser())
+
+app.use(cors({
+  origin: "http://localhost:5173",   // React app URL
+  credentials: true, // allow cookies, tokens
+  methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json())
+
+app.use(cookieParser())
+
+
+
 
 
 app.get('/',(req,res)=>{
@@ -22,7 +35,7 @@ app.get('/',(req,res)=>{
 app.use('/api/user', userAuthRoute)
 app.use('/api/food-partner', foodAuthRoute)
 app.use('/api/food-item',foodItemRoute)
-app.use('/api/food-partner',getFoodRouter)
+app.use('/api/food-partner/food',getFoodRouter)
 
 connectDb().then(()=>{
     app.listen(PORT,()=>{
