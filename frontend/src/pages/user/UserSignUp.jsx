@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-
+import { API } from "../../utils/Axios";
+import { setAuth } from "../../store/UserSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const UserSignup = () => {
   const [form, setForm] = useState({
@@ -9,6 +12,9 @@ export const UserSignup = () => {
   });
 
   const [loading, setLoading] = useState(false);
+const dispatch = useDispatch()
+
+const navigate = useNavigate()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,15 +25,18 @@ export const UserSignup = () => {
     setLoading(true);
 
     try {
-    //   const res = await axios.post(
-    //     "http://localhost:5000/api/user/signup",
-    //     form,
-    //     { withCredentials: true }
-    //   );
-
-    //   console.log(res.data);
+     const res = await API.post(
+            "/user/register",
+            form,
+            
+          );
+          dispatch(setAuth({
+            user: res.data.user,
+            role: res.data.role
+          }))
+    
       alert("Signup Successful ✅");
-      window.location.href = "/login"; // redirect after signup
+      navigate('/user/login')
     } catch (error) {
       alert(error.response?.data?.message || "Signup Failed ❌");
     }
@@ -93,7 +102,7 @@ export const UserSignup = () => {
 
           <p className="text-gray-400 text-sm text-center pt-2">
             Already have an account?{" "}
-            <a href="/login" className="text-purple-400 hover:underline">
+            <a href="/user/login" className="text-purple-400 hover:underline">
               Login
             </a>
           </p>

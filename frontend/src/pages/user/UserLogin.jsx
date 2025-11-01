@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { API } from "../../utils/Axios"; 
+import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+import { setAuth } from "../../store/UserSlice";
 
 
 export const UserLogin = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-
+const dispatch = useDispatch()
+// const navigate = useNavigate()
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -14,11 +20,17 @@ export const UserLogin = () => {
     setLoading(true);
 
     try {
-    //   const res = await axios.post(
-    //     "http://localhost:5000/api/user/login",
-    //     form,
-    //     { withCredentials: true } // ✅ important for cookies
-    //   );
+      const res = await API.post(
+        `/user/login`,
+        form,
+        
+      );
+      dispatch(setAuth({
+        user: res.data.user,
+        role: res.data.role
+      }))
+
+
 
     //   console.log("Login Success:", res.data);
       alert("Login Successful ✅");
@@ -78,9 +90,15 @@ export const UserLogin = () => {
           {/* Signup Link */}
           <p className="text-gray-400 text-sm text-center pt-2">
             Don't have an account?{" "}
-            <a href="/signup" className="text-purple-400 hover:underline">
+            <a href="/user/signup" className="text-purple-400 hover:underline">
               Sign Up
             </a>
+          </p>
+           <p className="text-gray-400 text-sm text-center pt-2">
+            Not a partner yet?{" "}
+            <NavLink to="/partner/signup" className="text-purple-400 hover:underline">
+              Register as Partner
+            </NavLink>
           </p>
         </form>
       </div>

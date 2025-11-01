@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { API } from "../../utils/Axios";
 // import axios from "axios";
+import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+import { setAuth } from "../../store/UserSlice";
 
 export const PartnerLogin = () => {
   const [form, setForm] = useState({
@@ -8,6 +12,9 @@ export const PartnerLogin = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
+  // const navigate = useNavigate()
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,14 +25,17 @@ export const PartnerLogin = () => {
     setLoading(true);
 
     try {
-    //   const res = await axios.post(
-    //     "http://localhost:5000/api/food-partner/login",
-    //     form,
-    //     { withCredentials: true }
-    //   );
-
-      alert("Login Successful ✅");
-      window.location.href = "/partner/dashboard"; // redirect food partner
+      const res = await API.post(
+        "/food-partner/login",
+        form,
+        
+      );
+dispatch(setAuth({
+  user: res.data.user,
+  role:res.data.role
+}))
+     // redirect food partner
+     alert("Login ho gya hai")
     } catch (error) {
       alert(error.response?.data?.message || "Login Failed ❌");
     }

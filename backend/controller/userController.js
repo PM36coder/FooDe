@@ -42,7 +42,7 @@ const userRegister = async (req, res) => {
         maxAge: 2 * 24 * 60 * 60 * 1000,
       })
       .status(201)
-      .json({ message: "User Registered Successfully", user });
+      .json({ message: "User Registered Successfully", user ,role:'user', success:true});
   } catch (error) {
     console.error("Error in user registration:", error);
     return res.status(500).json({ message: "Internal Server Error" });
@@ -78,7 +78,7 @@ const userLogin = async (req, res) => {
         maxAge: 2 * 24 * 60 * 60 * 1000,
       })
       .status(200)
-      .json({ message: "Login Successful", user });
+      .json({ message: "Login Successful", user ,role:'user', success:true });
   } catch (error) {
     console.error("Error in user registration:", error);
     return res.status(500).json({ message: "Internal Server Error" });
