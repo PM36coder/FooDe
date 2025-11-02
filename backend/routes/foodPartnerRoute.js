@@ -5,7 +5,7 @@ import {  foodPartnerLogin, foodPartnerLogout, foodPartnerRegister } from '../co
 
  router.post('/register', foodPartnerRegister)
  router.post('/login', foodPartnerLogin)
- router.get('/logout', foodPartnerLogout)
+ router.post('/logout', foodPartnerLogout)
 //  router.delete("/logout/:id", foodPartnerDelete);
 
  export default router

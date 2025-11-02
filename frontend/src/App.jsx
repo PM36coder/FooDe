@@ -8,6 +8,8 @@ import { PartnerSign } from "./pages/food-partner/PArtnerSign"
 import { About } from "./pages/About"
 import { Contact } from "./pages/Contact"
 import { Services } from "./pages/Service"
+import CreateFoodPartner from "./pages/food-partner/CreateFoodPartner"
+import PartnerProtected from "./components/protected/ProtectedPartner"
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,7 @@ const router = createBrowserRouter([
       // ✅ Food Partner Routes
       { path: "partner/login", element: <PartnerLogin /> },
       { path: "partner/signup", element: <PartnerSign /> },
+      {path:'partner/create-food', element:<PartnerProtected><CreateFoodPartner/></PartnerProtected>}
     ],
   },
 ])

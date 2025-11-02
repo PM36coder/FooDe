@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { API } from "../../utils/Axios";
 // import axios from "axios";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { setAuth } from "../../store/UserSlice";
 
 export const PartnerLogin = () => {
@@ -13,7 +13,7 @@ export const PartnerLogin = () => {
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
   const handleChange = (e) => {
@@ -36,6 +36,7 @@ dispatch(setAuth({
 }))
      // redirect food partner
      alert("Login ho gya hai")
+     navigate('/partner/create-food')
     } catch (error) {
       alert(error.response?.data?.message || "Login Failed ❌");
     }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { API } from "../../utils/Axios"; 
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { setAuth } from "../../store/UserSlice";
 
 
@@ -10,7 +10,7 @@ export const UserLogin = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 const dispatch = useDispatch()
-// const navigate = useNavigate()
+const navigate = useNavigate()
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -34,6 +34,7 @@ const dispatch = useDispatch()
 
     //   console.log("Login Success:", res.data);
       alert("Login Successful ✅");
+       navigate('/partner/create-food')
       // window.location.href = "/user/dashboard"
     } catch (error) {
       console.error(error);
