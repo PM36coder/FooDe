@@ -34,7 +34,7 @@ const navigate = useNavigate()
 
     //   console.log("Login Success:", res.data);
       alert("Login Successful ✅");
-       navigate('/partner/create-food')
+       navigate('/user/home')
       // window.location.href = "/user/dashboard"
     } catch (error) {
       console.error(error);

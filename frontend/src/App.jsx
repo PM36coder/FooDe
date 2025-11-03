@@ -8,8 +8,11 @@ import { PartnerSign } from "./pages/food-partner/PArtnerSign"
 import { About } from "./pages/About"
 import { Contact } from "./pages/Contact"
 import { Services } from "./pages/Service"
-import CreateFoodPartner from "./pages/food-partner/CreateFoodPartner"
+
 import PartnerProtected from "./components/protected/ProtectedPartner"
+import CreateFoodPartner from "./pages/food-partner/CreateFoodPartner"
+
+import ReelsFeed from "./pages/user/UserHome"
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,7 @@ const router = createBrowserRouter([
       // ✅ User Routes
       { path: "user/login", element: <UserLogin/> },
       { path: "user/signup", element: <UserSignup /> },
+      {path: "user/home" , element:<ReelsFeed/>},
 
       // ✅ Food Partner Routes
       { path: "partner/login", element: <PartnerLogin /> },
